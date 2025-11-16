@@ -1,39 +1,6 @@
 import Image from "next/image";
 
 export default function Page() {
-  const events = [
-    {
-      date: "4AM, 10-Jan",
-      title: "Bhogi",
-      desc: "Bhogi will start with a huge campfire set up.",
-    },
-    {
-      date: "6AM, 10-Jan",
-      title: "Morning DJ",
-      desc: "Get your morning vibes with bang south DJ, Grove in the snow untill you feel hot",
-    },
-    {
-      date: "10AM, 11-Jan",
-      title: "Makar Sankranthi Pooja",
-      desc: "We will start our colorful sankranthi day with Pooja",
-    },
-    {
-      date: "11AM, 11-Jan",
-      title: "Dance Program",
-      desc: "Enjoy the South Dance",
-    },
-    {
-      date: "12PM, 11-Jan",
-      title: "Lunch",
-      desc: "Taste South",
-    },
-    {
-      date: "3PM, 11-Jan",
-      title: "Final DJ",
-      desc: "Dance untill you are tired",
-    },
-  ];
-
   return (
     <div
       className="
@@ -74,8 +41,9 @@ export default function Page() {
           ))}
         </div>
       </div>
-
-      <main className="relative flex flex-col items-center justify-center p-4 md:p-6 overflow-hidden"></main>
+      <main className="relative flex flex-col items-center justify-center p-4 md:p-6 overflow-hidden">
+       
+      </main>
     </div>
   );
 }
