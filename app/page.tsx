@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 
 import Hero from "@/components/bhogi/Hero";
@@ -5,7 +6,7 @@ import AboutSection from "@/components/bhogi/About";
 import EventsSection from "@/components/bhogi/Event";
 import { Gallery } from "@/components/bhogi/Gallery";
 import { History } from "@/components/bhogi/History";
-
+import SankrantiPage from "@/components/sankranti/page";
 export default function Page() {
   return (
     <>
@@ -44,6 +45,23 @@ export default function Page() {
             ))}
           </div>
         </div>
+        {/* Scroll Down Arrow */}
+        <div
+          onClick={() =>
+            document.getElementById("bhogi-section")?.scrollIntoView({ behavior: "smooth" })
+          }
+          className="
+    absolute bottom-6 left-1/2 -translate-x-1/2 
+    text-yellow-200/80 
+    text-4xl 
+    cursor-pointer 
+    animate-bounce 
+    z-50
+  "
+        >
+          ↓
+        </div>
+
 
         <Image
           src="/decor/confetti.png"
@@ -117,20 +135,62 @@ export default function Page() {
             2026
           </p>
         </div>
+        <div className="mt-[50px] md:mt-[30px] flex gap-14 z-50 pl-[55px] md:pl-[520px]">
+            <button
+              onClick={() =>
+                document.getElementById("bhogi-section")?.scrollIntoView({ behavior: "smooth" })
+              }
+              className="
+      px-10 py-2 
+      bg-[#b88a30]/40 backdrop-blur-sm 
+      text-yellow-200 
+      font-[var(--font-cinzel)]
+      border border-yellow-300/30 
+      rounded-xl 
+      shadow-md 
+      hover:bg-[#b88a30]/60 
+      transition-all 
+      tracking-wide
+    "
+            >
+              Bhogi 
+            </button>
+
+            <button
+              onClick={() =>
+                document.getElementById("sankranti-section")?.scrollIntoView({ behavior: "smooth" })
+              }
+              className="
+      px-6 py-2 
+      bg-[#b88a30]/40 backdrop-blur-sm 
+      text-yellow-200 
+      font-[var(--font-cinzel)]
+      border border-yellow-300/30 
+      rounded-xl 
+      shadow-md 
+      hover:bg-[#b88a30]/60 
+      transition-all 
+      tracking-wide
+    "
+            >
+              Sankranti
+            </button>
+          </div>
       </div>
       <div
-  className="w-full"
-  style={{
-    height: "160px", // adjust height as needed (ex: "96px", "160px", "256px")
-    background:
-      "linear-gradient(to bottom, " +
-        "#240000 5%,"+ 
-        "#020102 95%" +
-      ")",
-  }}
-/>
+        className="w-full"
+        style={{
+          height: "160px", // adjust height as needed (ex: "96px", "160px", "256px")
+          background:
+            "linear-gradient(to bottom, " +
+            "#240000 5%," +
+            "#020102 95%" +
+            ")",
+        }}
+      />
 
-      <main className="bg-black text-white">
+      <main id="bhogi-section" className="bg-black text-white">
+
         <Hero />
         <div className="bg-gradient-to-b from-black to-gray-950">
           <AboutSection />
@@ -138,7 +198,19 @@ export default function Page() {
           <History />
           <Gallery />
         </div>
+
       </main>
+      <div
+        className="w-full"
+        style={{
+          height: "200px",
+          background:
+            "linear-gradient(to bottom, #010a1aff 1%, #80a3f0ff 75%, #87b7f5ff 90%)",
+        }}
+      />
+      <div id="sankranti-section">
+        <SankrantiPage />
+      </div>
     </>
   );
 }

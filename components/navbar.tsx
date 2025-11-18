@@ -40,8 +40,6 @@ export default function Navbar() {
         </Link>
         <div className="flex gap-6 text-white text-sm font-medium">
           <Link href="/">Home</Link>
-          <Link href="/bhogi">Bhogi</Link>
-          <Link href="/sankranti">Sankranti</Link>
           <Link href="/teams">Teams</Link>
           <Link href="/gallery">Gallery</Link>
         </div>
