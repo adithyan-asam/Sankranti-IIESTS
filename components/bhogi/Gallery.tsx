@@ -3,6 +3,12 @@
 import Image from "next/image";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import { Castoro_Titling } from "next/font/google";
+const castoro = Castoro_Titling({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 const images = [
   "/bhogi/img1.jpg",
@@ -59,7 +65,6 @@ export function Gallery() {
     let animationFrameId: number;
 
     const autoScroll = () => {
-      // Auto-scroll ALWAYS runs unless dragging
       if (!isDraggingRef.current && reel) {
         reel.scrollLeft += 0.5;
       }
@@ -87,7 +92,6 @@ export function Gallery() {
   };
 
   const handlePointerLeave = () => {
-    // Stop dragging only
     isDraggingRef.current = false;
     setIsDragging(false);
 
@@ -104,16 +108,13 @@ export function Gallery() {
       reelRef.current.style.cursor = "grab";
     }
 
-    // MOBILE FIX — resume auto scroll after momentum scroll ends
     const reel = reelRef.current;
     if (reel) {
       let last = reel.scrollLeft;
       const checkStop = () => {
         if (!reel) return;
-
         const current = reel.scrollLeft;
         if (Math.abs(current - last) < 1) {
-          // do nothing — auto scroll already active
         } else {
           last = current;
           requestAnimationFrame(checkStop);
@@ -154,7 +155,10 @@ export function Gallery() {
 
   return (
     <div className="relative z-10 w-full py-16">
-      <h2 className="text-6xl md:text-7xl mb-12 text-center castoro-titling-regular font-black">
+      {/* Apply castoro.className here */}
+      <h2
+        className={`text-6xl md:text-7xl mb-12 text-center ${castoro.className} font-black`}
+      >
         Gallery
       </h2>
 
@@ -162,8 +166,8 @@ export function Gallery() {
         <div
           ref={reelRef}
           className={`w-full h-64 md:h-80 overflow-x-hidden
-                       select-none
-                       ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
+                        select-none
+                        ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
           onPointerDown={handlePointerDown}
           onPointerUp={handlePointerUp}
           onPointerLeave={handlePointerLeave}
