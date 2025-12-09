@@ -1,263 +1,433 @@
-"use client"
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import AboutSection from "./AboutSection";
-import React, { useState, useEffect } from 'react';
-import { CardBody, CardContainer, CardItem } from "../ui/3d-card";
+"use client";
 
-const titleWords: string[] = ["SANKRANTI", "సంక్రాంతి"];
-const readTimeInMs: number = 2000;
-const animationTimeInMs: number = 500;
+import {
+  motion,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+} from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link"; // Added Import
 
-export default function SankrantiPage() {
-  const [currentWordIndex, setCurrentWordIndex] = useState<number>(0);
-  const [animationClass, setAnimationClass] = useState<string>('text-fade-in');
-  const [sparkles, setSparkles] = useState<{ x: number, y: number }[]>([]);
+/* -------------------------------------------------------------------------- */
+/* CONSTANTS                                                                  */
+/* -------------------------------------------------------------------------- */
 
-  useEffect(() => {
-    const generated = Array.from({ length: 10 }).map(() => ({
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-    }));
-    setSparkles(generated);
-  }, []);
+const TITLES = ["SANKRANTI", "సంక్రాంతి"];
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setAnimationClass('text-fade-out');
-      setTimeout(() => {
-        setCurrentWordIndex(prevIndex => (prevIndex + 1) % titleWords.length);
-        setAnimationClass('text-fade-in');
-      }, animationTimeInMs);
-    }, readTimeInMs + animationTimeInMs);
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
+const EVENTS = [
+  {
+    title: "Morning Puja",
+    date: "11 Jan 2026",
+    time: "10:00 AM",
+    venue: "Netaji Bhavan",
+    icon: "🙏",
+  },
+  {
+    title: "Cultural Show",
+    date: "11 Jan 2026",
+    time: "11:00 AM",
+    venue: "Netaji Bhavan",
+    icon: "🎭",
+  },
+  {
+    title: "Folk Dance",
+    date: "11 Jan 2026",
+    time: "11:30 AM",
+    venue: "Netaji Bhavan",
+    icon: "💃",
+  },
+  {
+    title: "Classical Parade",
+    date: "11 Jan 2026",
+    time: "2:00 PM",
+    venue: "Netaji Bhavan",
+    icon: "🎻",
+  },
+  {
+    title: "DJ Night",
+    date: "11 Jan 2026",
+    time: "8:30 PM",
+    venue: "Netaji Bhavan",
+    icon: "🎧",
+  },
+];
 
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end end"],
-  });
+const GLIMPSES = [
+  {
+    src: "/galleryphotos/2025/sankranthi/DSC_0240.jpg",
+    alt: "Kites filling the sunset sky",
+    span: "col-span-1 md:col-span-2 row-span-2",
+  },
+  {
+    src: "/galleryphotos/2025/sankranthi/DSC_0224.jpg",
+    alt: "Bonfire night celebration",
+    span: "col-span-1 row-span-1",
+  },
+  {
+    src: "/galleryphotos/2025/sankranthi/DSC_0420.jpg",
+    alt: "Students gathering around fire",
+    span: "col-span-1 row-span-1",
+  },
+  {
+    src: "/galleryphotos/2025/sankranthi/DSC_0407.jpg",
+    alt: "Warmth of the festival",
+    span: "col-span-1 md:col-span-2 row-span-1",
+  },
+];
 
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+/* -------------------------------------------------------------------------- */
+/* SUB-COMPONENTS                                                             */
+/* -------------------------------------------------------------------------- */
 
-  function useFadeText(text: string, delay = 500) {
-    const [displayed, setDisplayed] = useState("");
-
-    useEffect(() => {
-      setDisplayed("");
-      const timer = setTimeout(() => {
-        setDisplayed(text);
-      }, delay);
-      return () => clearTimeout(timer);
-    }, [text, delay]);
-
-    return displayed;
-  }
-
-  const typedText = useFadeText(titleWords[currentWordIndex]);
-
+// 1. About Section
+function AboutSection() {
   return (
-    <main ref={ref} className="relative min-h-screen -z-10 bg-gradient-to-br from-[#d0e8ff] via-[#b5d9ff] to-[#6ab7ff] text-white">
-      <motion.div style={{ opacity: heroOpacity }}>
-        {/* Background video */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="fixed top-0 left-0 w-full h-full object-cover -z-20"
+    <section className="relative py-32 bg-stone-950 overflow-hidden">
+      {/* Decorative Golden Mandala Glow */}
+      <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-gradient-to-b from-amber-600/20 to-transparent rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-orange-700/10 rounded-full blur-[100px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center relative z-10">
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
         >
-          <source src="sankranti/WhatsApp Video 2025-11-15 at 6.39.49 PM - Trim.mp4" type="video/mp4" />
-        </video>
-        <section className="min-h-screen relative flex items-center justify-center h-screen overflow-hidden z-10 bg-transparent">
-          {/* Sparkles */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {sparkles.map((s, i) => (
-              <motion.div
+          <div className="inline-block px-3 py-1 mb-4 border border-amber-500/30 rounded-full bg-amber-500/10 text-amber-400 text-sm tracking-widest uppercase font-semibold">
+            The Festival of Harvest
+          </div>
+          <h2 className="text-4xl md:text-6xl font-serif font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-amber-100 via-orange-100 to-amber-200">
+            About The <br /> Celebration
+          </h2>
+          <p className="text-stone-300 text-lg leading-relaxed mb-8 font-light">
+            Makar Sankranti marks the transition of the sun into the zodiac sign
+            of Makara (Capricorn). It is a festival of harvest, gratitude, and
+            new beginnings. At{" "}
+            <span className="text-amber-400 font-semibold border-b border-amber-400/50">
+              IIEST Shibpur
+            </span>
+            , we bring this tradition to life with vibrant performances, sweet
+            delights, and the warmth of togetherness.
+          </p>
+
+          <div className="flex flex-wrap gap-4">
+            {["Harvest", "Unity", "Joy"].map((tag, i) => (
+              <div
                 key={i}
-                className="absolute w-2 h-2 bg-yellow-300 rounded-full opacity-70"
-                initial={{ x: s.x, y: s.y }}
-                animate={{
-                  y: [s.y, -20],
-                  opacity: [0.7, 0],
-                }}
-                transition={{
-                  duration: 6 + Math.random() * 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
+                className="px-8 py-3 rounded-full bg-stone-900 border border-stone-800 text-amber-200/90 font-medium shadow-lg shadow-black/20 hover:border-amber-500/50 transition-colors cursor-default"
+              >
+                {tag}
+              </div>
             ))}
           </div>
+        </motion.div>
 
-          {/* Main Title and Subtitle */}
-          <div className="z-10 text-center animate-fade-in p-6 rounded-2xl">
+        {/* Visual / Image Placeholder */}
+        <motion.div
+          initial={{ opacity: 0, rotate: 3, scale: 0.9 }}
+          whileInView={{ opacity: 1, rotate: 0, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
+          className="relative h-[450px] w-full"
+        >
+          {/* Artistic Border Frame */}
+          <div className="absolute inset-0 border-2 border-amber-500/30 rounded-2xl translate-x-4 translate-y-4" />
 
-            <h1
-              className={`font-extrabold bg-clip-text text-white font-inter
-                    text-[50px] md:text-[120px] ${animationClass}`}
-            >
-              {typedText}
-            </h1>
+          <div className="relative h-full w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10 group bg-stone-900">
+            <div className="absolute inset-0 group-hover:scale-110 transition-transform duration-1000">
+              <Image
+                src="/sankranti/poster.jpg"
+                alt="Makar Sankranti Celebration"
+                fill
+                className="object-cover opacity-90 group-hover:opacity-100 transition-opacity"
+              />
+            </div>
+            {/* Overlay Gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-transparent to-transparent opacity-80" />
 
-            <p
-              className="text-lg md:text-2xl font-semibold tracking-wide"
-            >
-              Celebrating the spirit of harvest, unity, and joy at IIEST Shibpur
-            </p>
-
+            <div className="absolute bottom-0 left-0 right-0 p-8">
+              <p className="text-amber-100 font-serif text-2xl italic">
+                &quot;Celebrating Tradition&quot;
+              </p>
+            </div>
           </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
 
-        </section>
-      </motion.div>
-
-      <motion.div>
-        <AboutSection />
-      </motion.div>
-
-      {/* Events Section */}
-      <motion.section
-        className="min-h-screen max-w-7xl mx-auto px-6 pt-10 pb-0 relative z-30 text-white"
-      >
-        {/* Heading */}
-        <div className="text-center mb-0">
-          <motion.h2
-            className="relative inline-block"
-            initial={{ y: 10, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            whileHover={{ scale: 1.02 }}
-          >
-            {/* top row: kite + title */}
-            <span className="flex items-center justify-center gap-4">
-              {/* floating kite (decorative) */}
-              {/* <motion.span
-                aria-hidden="true"
-                initial={{ y: 0, rotate: -6 }}
-                animate={{ y: [0, -8, 0], rotate: [-6, 6, -6] }}
-                transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
-                className="w-10 h-10 rounded-full flex items-center justify-center"
-              >
-                <svg viewBox="0 0 64 64" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <linearGradient id="kiteGrad" x1="0" x2="1">
-                      <stop offset="0" stopColor="#FF6A00" />
-                      <stop offset="1" stopColor="#FFD166" />
-                    </linearGradient>
-                  </defs>
-                  <path d="M32 4 L56 28 L32 52 L8 28 Z" fill="url(#kiteGrad)" stroke="#7A2E0F" strokeWidth="1.5" />
-                  <path d="M32 52 L32 62" stroke="#7A2E0F" strokeWidth="1.5" strokeLinecap="round" />
-                  <circle cx="32" cy="32" r="0.5" fill="transparent" />
-                </svg>
-              </motion.span> */}
-
-              {/* main title with festival gradient */}
-              <span
-                className="bg-clip-text text-white
-                   text-6xl font-extrabold tracking-tight font-comforter"
-              >
-                EVENTS
-              </span>
-            </span>
-
-            {/* animated gradient underline (grows from center) */}
-            <motion.span
-              className="block mx-auto mt-3 h-[4px] w-40 rounded-full overflow-hidden"
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.9, ease: "easeOut" }}
-              style={{ transformOrigin: "center" }}
-            >
-              <span className="block h-full w-full bg-gradient-to-r from-blue-400 to-blue-200" />
-            </motion.span>
-
-            {/* small subtitle */}
-            <motion.p
-              className="mt-4 text-sm md:text-base font-medium"
-              initial={{ opacity: 0, y: 6 }}
+// 2. Glimpses Section
+function GlimpsesSection() {
+  return (
+    <section className="py-32 bg-stone-950 relative border-t border-white/5">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+          <div className="max-w-xl">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.15, duration: 0.5 }}
+              className="text-4xl md:text-5xl font-bold text-white mb-4"
             >
-              Relive the moments — music, dance & harvest joy at IIEST Shibpur
-            </motion.p>
-          </motion.h2>
+              Past <span className="text-amber-500">Glimpses</span>
+            </motion.h2>
+            <p className="text-stone-400 text-lg font-light">
+              Capturing the vibrant spirit of kites, colors, and smiles from
+              previous years.
+            </p>
+          </div>
+          <div className="hidden md:block h-[1px] flex-1 bg-gradient-to-r from-stone-800 to-transparent mx-8 mb-4" />
         </div>
-        {/* Event Cards */}
-        <div className="flex flex-col md:flex-row flex-wrap justify-center items-between gap-10 mt-10 pb-5">
-          {[
-            {
-              title: "Puja",
-              date: "11 January 2026",
-              time: "10:00 AM",
-              venue: "Netaji Bhavan",
-            },
-            {
-              title: "Cultural Performance",
-              date: "11 January 2026",
-              time: "11:00 AM",
-              venue: "Netaji Bhavan",
-            },
-            {
-              title: "Dance",
-              date: "11 January 2026",
-              time: "11:30 AM",
-              venue: "Netaji Bhavan",
-            },
-            {
-              title: "Classical Parade",
-              date: "11 January 2026",
-              time: "2:00 PM",
-              venue: "Netaji Bhavan",
-            },
-            {
-              title: "Dj",
-              date: "11 January 2026",
-              time: "2:30 AM",
-              venue: "Netaji Bhavan",
-            },
-          ].map((event, index) => (
+
+        <div className="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-[800px] md:h-[600px]">
+          {GLIMPSES.map((item, i) => (
             <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.15 }}
-              whileHover={{ scale: 1.04 }}
-              className="relative group bg-green-meadow-100 rounded-xl shadow-lg border border-amber-400 p-6 md:h-[250px] md:w-[300px]"
+              transition={{ delay: i * 0.1 }}
+              // Added cursor-pointer so users know it's clickable
+              className={`relative rounded-2xl overflow-hidden shadow-xl border border-white/5 group ${item.span} cursor-pointer`}
             >
-              <h3 className="text-2xl font-bold text-blue-600 drop-shadow-lg text-center mt-4 tracking-wide">
-                {event.title}
-              </h3>
+              {/* Wrapped content in Link */}
+              <Link href="/gallery" className="block w-full h-full relative">
+                <div className="absolute inset-0 group-hover:scale-105 transition-transform duration-700 ease-in-out">
+                  <Image
+                    src={item.src}
+                    alt={item.alt}
+                    fill
+                    className="object-cover filter sepia-[0.2] group-hover:sepia-0 transition-all duration-500"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80 opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
 
-              <div className="mt-4 text-center text-gray-700 font-medium space-y-2">
-                <p>
-                  <span className="font-semibold text-blue-600">Date:</span> {event.date}
-                </p>
-                <p>
-                  <span className="font-semibold text-blue-600">Time:</span> {event.time}
-                </p>
-                <p>
-                  <span className="font-semibold text-blue-600">Venue:</span> {event.venue}
-                </p>
-              </div>
-
-              <motion.span
-                className="absolute top-3 right-3 text-blue-500"
-                animate={{ scale: [1, 1.3, 1] }}
-                transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-              >
-                ✨
-              </motion.span>
+                <div className="absolute bottom-0 left-0 w-full p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                  <div className="h-1 w-12 bg-amber-500 mb-3 rounded-full" />
+                  <span className="text-white font-medium text-lg drop-shadow-md">
+                    2025 Highlights
+                  </span>
+                </div>
+              </Link>
             </motion.div>
           ))}
         </div>
-      </motion.section>
+      </div>
+    </section>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* MAIN PAGE                                                                  */
+/* -------------------------------------------------------------------------- */
+
+export default function SankrantiPage() {
+  const [index, setIndex] = useState(0);
+  const containerRef = useRef(null);
+
+  // Parallax scroll hooks
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % TITLES.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <main
+      ref={containerRef}
+      className="relative min-h-screen bg-stone-950 text-amber-50 overflow-x-hidden selection:bg-amber-500 selection:text-white"
+    >
+      {/* === HERO SECTION === */}
+      <div className="relative h-screen w-full overflow-hidden flex items-center justify-center border-b border-amber-900/20">
+        {/* VIDEO BACKGROUND */}
+        <motion.div
+          style={{ y: heroY, opacity: heroOpacity }}
+          className="absolute inset-0 z-0"
+        >
+          {/* Overlay: Warm gradient to blend video with Stone theme */}
+          <div className="absolute inset-0 bg-gradient-to-b from-stone-900/30 via-transparent to-stone-950 z-10" />
+
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src="sankranti/sank_vid.mp4" type="video/mp4" />
+          </video>
+        </motion.div>
+
+        {/* CONTENT LAYER */}
+        <div className="relative z-20 text-center px-4 w-full flex flex-col items-center justify-center">
+          {/* Text Vignette - Warmer tone now */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[400px] bg-gradient-to-r from-transparent via-stone-950/70 to-transparent blur-3xl -z-10" />
+
+          <div className="h-[120px] md:h-[180px] flex items-center justify-center relative">
+            <AnimatePresence mode="wait">
+              <motion.h1
+                key={TITLES[index]}
+                initial={{ y: 40, opacity: 0, scale: 0.9 }}
+                animate={{
+                  y: 0,
+                  opacity: 1,
+                  scale: 1,
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                }}
+                exit={{ y: -40, opacity: 0, scale: 0.9 }}
+                transition={{
+                  y: { duration: 0.8, ease: "backOut" },
+                  opacity: { duration: 0.6 },
+                  scale: { duration: 0.8 },
+                  backgroundPosition: {
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "linear",
+                  },
+                }}
+                style={{
+                  // Luxurious Gold Gradient
+                  backgroundImage:
+                    "linear-gradient(180deg, #FFFDE7 0%, #FFD700 40%, #B8860B 80%, #78350F 100%)",
+                  backgroundSize: "100% 200%",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  filter:
+                    "drop-shadow(0 4px 0px rgba(0,0,0,0.8)) drop-shadow(0 0 40px rgba(251, 191, 36, 0.4))",
+                }}
+                className="text-6xl md:text-9xl font-extrabold tracking-tighter h-40"
+              >
+                {TITLES[index]}
+              </motion.h1>
+            </AnimatePresence>
+          </div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="text-amber-100/80 tracking-[0.2em] uppercase text-sm font-medium mt-4"
+          >
+            The Festival of Kites & Sun
+          </motion.p>
+        </div>
+
+        {/* Scroll Down Arrow */}
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 2 }}
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 text-amber-200/60 drop-shadow-md"
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M19 14l-7 7m0 0l-7-7m7 7V3"
+            />
+          </svg>
+        </motion.div>
+      </div>
+
+      {/* === ABOUT SECTION === */}
+      <AboutSection />
+
+      {/* === GLIMPSES SECTION === */}
+      <GlimpsesSection />
+
+      {/* === EVENTS SECTION === */}
+      <section className="relative py-32 bg-stone-950">
+        {/* Background Gradients */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[800px] bg-gradient-to-b from-amber-900/10 to-transparent blur-[120px] pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-20">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-4xl md:text-5xl font-bold inline-block text-white"
+            >
+              Event Schedule
+            </motion.h2>
+            {/* Artistic divider */}
+            <div className="flex items-center justify-center gap-2 mt-4 opacity-70">
+              <div className="h-[1px] w-12 bg-amber-500/50" />
+              <div className="h-1.5 w-1.5 rotate-45 bg-amber-500" />
+              <div className="h-[1px] w-12 bg-amber-500/50" />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+            {EVENTS.map((event, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                whileHover={{ y: -8 }}
+                className="group w-full max-w-sm"
+              >
+                {/* Glassmorphism Card */}
+                <div className="relative h-full bg-stone-900/60 backdrop-blur-xl border border-white/5 p-8 rounded-2xl shadow-2xl overflow-hidden hover:border-amber-500/40 transition-all duration-300">
+                  {/* Glowing orb effect on hover */}
+                  <div className="absolute -top-20 -right-20 w-40 h-40 bg-amber-500/10 rounded-full blur-3xl group-hover:bg-amber-500/20 transition-colors duration-500" />
+
+                  {/* Subtle noise texture overlay */}
+                  <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] pointer-events-none" />
+
+                  <div className="relative z-10 flex justify-between items-start mb-6">
+                    <div className="text-5xl p-3 bg-stone-800/50 rounded-xl border border-white/5 group-hover:scale-110 transition-transform duration-300">
+                      {event.icon}
+                    </div>
+                    <div className="px-3 py-1 bg-amber-950/30 border border-amber-900/30 rounded text-amber-500 text-xs font-bold uppercase tracking-wide">
+                      Jan 11
+                    </div>
+                  </div>
+
+                  <h3 className="relative z-10 text-2xl font-bold text-white mb-2 group-hover:text-amber-400 transition-colors">
+                    {event.title}
+                  </h3>
+
+                  <div className="relative z-10 space-y-4 mt-8 border-t border-white/5 pt-6 text-stone-400 font-medium text-sm">
+                    <div className="flex items-center gap-3 group/item">
+                      <span className="p-1.5 rounded-full bg-stone-800 text-amber-500 group-hover/item:bg-amber-500 group-hover/item:text-stone-900 transition-colors">
+                        ⏰
+                      </span>
+                      {event.time}
+                    </div>
+                    <div className="flex items-center gap-3 group/item">
+                      <span className="p-1.5 rounded-full bg-stone-800 text-amber-500 group-hover/item:bg-amber-500 group-hover/item:text-stone-900 transition-colors">
+                        📍
+                      </span>
+                      {event.venue}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

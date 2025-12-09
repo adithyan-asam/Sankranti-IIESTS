@@ -48,7 +48,9 @@ export default function Page() {
         {/* Scroll Down Arrow */}
         <div
           onClick={() =>
-            document.getElementById("bhogi-section")?.scrollIntoView({ behavior: "smooth" })
+            document
+              .getElementById("bhogi-section")
+              ?.scrollIntoView({ behavior: "smooth" })
           }
           className="
     absolute bottom-6 left-1/2 -translate-x-1/2 
@@ -61,7 +63,6 @@ export default function Page() {
         >
           ↓
         </div>
-
 
         <Image
           src="/decor/confetti.png"
@@ -136,11 +137,13 @@ export default function Page() {
           </p>
         </div>
         <div className="mt-[50px] md:mt-[30px] flex gap-14 z-50 pl-[55px] md:pl-[520px]">
-            <button
-              onClick={() =>
-                document.getElementById("bhogi-section")?.scrollIntoView({ behavior: "smooth" })
-              }
-              className="
+          <button
+            onClick={() =>
+              document
+                .getElementById("bhogi-section")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
+            className="
       px-10 py-2 
       bg-[#b88a30]/40 backdrop-blur-sm 
       text-yellow-200 
@@ -152,15 +155,17 @@ export default function Page() {
       transition-all 
       tracking-wide
     "
-            >
-              Bhogi 
-            </button>
+          >
+            Bhogi
+          </button>
 
-            <button
-              onClick={() =>
-                document.getElementById("sankranti-section")?.scrollIntoView({ behavior: "smooth" })
-              }
-              className="
+          <button
+            onClick={() =>
+              document
+                .getElementById("sankranti-section")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
+            className="
       px-6 py-2 
       bg-[#b88a30]/40 backdrop-blur-sm 
       text-yellow-200 
@@ -172,25 +177,20 @@ export default function Page() {
       transition-all 
       tracking-wide
     "
-            >
-              Sankranti
-            </button>
-          </div>
+          >
+            Sankranti
+          </button>
+        </div>
       </div>
       <div
         className="w-full"
         style={{
           height: "160px", // adjust height as needed (ex: "96px", "160px", "256px")
           background:
-            "linear-gradient(to bottom, " +
-            "#240000 5%," +
-            "#020102 95%" +
-            ")",
+            "linear-gradient(to bottom, " + "#240000 5%," + "#020102 95%" + ")",
         }}
       />
-
       <main id="bhogi-section" className="bg-black text-white">
-
         <Hero />
         <div className="bg-gradient-to-b from-black to-gray-950">
           <AboutSection />
@@ -198,16 +198,8 @@ export default function Page() {
           <History />
           <Gallery />
         </div>
-
       </main>
-      <div
-        className="w-full"
-        style={{
-          height: "200px",
-          background:
-            "linear-gradient(to bottom, #010a1aff 1%, #80a3f0ff 75%, #87b7f5ff 90%)",
-        }}
-      />
+
       <div id="sankranti-section">
         <SankrantiPage />
       </div>
