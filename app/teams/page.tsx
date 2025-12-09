@@ -1,4 +1,4 @@
-import { TeamLayout } from "@/components/teams/TeamLayout";
+/* import { TeamLayout } from "@/components/teams/TeamLayout";
 import { members, categories } from "@/public/teams/data/data";
 
 export default function TeamPage() {
@@ -17,3 +17,4 @@ export default function TeamPage() {
     </div>
   );
 }
+ */

@@ -40,7 +40,6 @@ export default function Navbar() {
         </Link>
         <div className="flex gap-6 text-white text-sm font-medium">
           <Link href="/">Home</Link>
-          <Link href="/teams">Teams</Link>
           <Link href="/gallery">Gallery</Link>
         </div>
       </nav>
@@ -88,15 +87,6 @@ export default function Navbar() {
           <div className="flex flex-col items-center gap-4 text-white text-lg font-medium">
             <Link href="/" onClick={closeMenu}>
               Home
-            </Link>
-            <Link href="/bhogi" onClick={closeMenu}>
-              Bhogi
-            </Link>
-            <Link href="/sankranti" onClick={closeMenu}>
-              Sankranti
-            </Link>
-            <Link href="/teams" onClick={closeMenu}>
-              Teams
             </Link>
             <Link href="/gallery" onClick={closeMenu}>
               Gallery

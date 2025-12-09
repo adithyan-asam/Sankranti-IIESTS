@@ -13,7 +13,20 @@
   --font-cinzel: "Cinzel", serif;
   --font-montserrat: "Montserrat", sans-serif;
 }
+@layer base {
+  /* Target the entire page structure */
+  html, body {
+    overflow-x: hidden; /* Prevents side-scrolling from animations */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
 
+  /* Target Webkit (Chrome, Safari, Edge) */
+  html::-webkit-scrollbar, 
+  body::-webkit-scrollbar {
+    display: none;
+  }
+}
 @layer utilities {
   .aurora-overlay {
     position: relative;
