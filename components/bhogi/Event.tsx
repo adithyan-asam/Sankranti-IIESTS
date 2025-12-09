@@ -1,5 +1,12 @@
 "use client";
 
+import { Castoro_Titling } from "next/font/google";
+const castoro = Castoro_Titling({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
+
 const events = [
   {
     title: "Bhogi Fire Lightening",
@@ -25,7 +32,10 @@ export default function EventsSection() {
   return (
     <section className="text-white py-20 px-6 md:px-16">
       <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-6xl lg:text-7xl mb-12 castoro-titling-regular font-black">
+        {/* Apply castoro.className here */}
+        <h2
+          className={`text-6xl lg:text-7xl mb-12 ${castoro.className} font-black`}
+        >
           Events
         </h2>
         <div className="grid gap-10 md:grid-cols-3">

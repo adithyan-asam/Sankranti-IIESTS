@@ -1,10 +1,19 @@
 "use client";
 
+import { Castoro_Titling } from "next/font/google";
+const castoro = Castoro_Titling({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export default function AboutSection() {
   return (
     <section className="relative text-white py-20 px-6 md:px-16">
       <div className="max-w-5xl mx-auto text-center">
-        <h2 className="text-6xl md:text-7xl mb-6 castoro-titling-regular font-black">
+        <h2
+          className={`text-6xl md:text-7xl mb-6 ${castoro.className} font-black`}
+        >
           About Bhogi
         </h2>
         <p className="text-gray-300 text-lg leading-relaxed text-[#c2beb8]">
