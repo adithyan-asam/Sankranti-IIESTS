@@ -7,6 +7,8 @@ import EventsSection from "@/components/bhogi/Event";
 import { Gallery } from "@/components/bhogi/Gallery";
 import { History } from "@/components/bhogi/History";
 import SankrantiPage from "@/components/sankranti/page";
+import DhotiMerchCard from "@/components/DhotiMerchCard";
+import RampWalkCard from "@/components/RampWalkCard";
 export default function Page() {
   return (
     <>
@@ -112,7 +114,6 @@ export default function Page() {
           pointer-events-none mt-[120] md:mt-[85px]
         "
         />
-
         <div className="relative z-30 flex flex-col items-center mt-64 select-none">
           <div className="flex items-center gap-3 md:gap-6">
             <h1
@@ -136,7 +137,7 @@ export default function Page() {
             2026
           </p>
         </div>
-        <div className="mt-[50px] md:mt-[30px] flex gap-14 z-50 pl-[55px] md:pl-[520px]">
+        <div className="relative mt-[80px] flex w-full justify-center gap-14 z-50">
           <button
             onClick={() =>
               document
@@ -180,12 +181,27 @@ export default function Page() {
           >
             Sankranti
           </button>
+          
+        </div>
+        <div
+          className="
+            relative z-40 
+            flex flex-col gap-6 scale-[0.85]
+            mt-20 items-center w-full px-2 mb-20
+            
+            /* Desktop Styling (lg breakpoint) */
+            lg:absolute lg:top-[60%] lg:right-8 lg:w-[320px] lg:mt-0 lg:mb-0 lg:items-end lg:px-0 lg:scale-[1.05] lg:gap-4
+          "
+        >
+          <DhotiMerchCard />
+          <RampWalkCard />
         </div>
       </div>
+      
       <div
         className="w-full"
         style={{
-          height: "160px", // adjust height as needed (ex: "96px", "160px", "256px")
+          height: "160px", 
           background:
             "linear-gradient(to bottom, " + "#240000 5%," + "#020102 95%" + ")",
         }}
