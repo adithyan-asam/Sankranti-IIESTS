@@ -159,7 +159,7 @@ function AboutSection() {
 // 2. Glimpses Section
 function GlimpsesSection() {
   return (
-    <section className="py-32 bg-stone-950 relative border-t border-white/5">
+    <section className="py-32 bg-stone-950 relative ">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
           <div className="max-w-xl">
@@ -247,7 +247,7 @@ export default function SankrantiPage() {
       className="relative min-h-screen bg-stone-950 text-amber-50 overflow-x-hidden selection:bg-amber-500 selection:text-white"
     >
       {/* === HERO SECTION === */}
-      <div className="relative h-screen w-full overflow-hidden flex items-center justify-center border-b border-amber-900/20">
+      <div className="relative h-screen w-full overflow-hidden flex items-center justify-center ">
         {/* VIDEO BACKGROUND */}
         <motion.div
           style={{ y: heroY, opacity: heroOpacity }}
