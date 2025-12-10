@@ -8,14 +8,14 @@ const castoro = Castoro_Titling({
 
 export function History() {
   return (
-    <section className="relative text-white py-20 px-6 md:px-16">
+    <section className="relative text-white py-20 px-6 md:px-16 md:py-32">
       <div className="max-w-7xl mx-auto text-center">
         <h2
           className={`text-6xl md:text-7xl mb-6 ${castoro.className} font-black`}
         >
           History & Origin
         </h2>
-        <p className="text-gray-300 text-lg leading-relaxed text-[#c2beb8]">
+        <p className="text-gray-300 text-lg leading-relaxed ">
           Bhogi originates from ancient agrarian life in South India, marking
           the transition from winter to the arrival of brighter, warmer days. It
           was traditionally dedicated to Lord Indra, the god of rains, to ensure

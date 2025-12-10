@@ -181,7 +181,6 @@ export default function Page() {
           >
             Sankranti
           </button>
-          
         </div>
         <div
           className="
@@ -197,16 +196,9 @@ export default function Page() {
           <RampWalkCard />
         </div>
       </div>
-      
-      <div
-        className="w-full"
-        style={{
-          height: "160px", 
-          background:
-            "linear-gradient(to bottom, " + "#240000 5%," + "#020102 95%" + ")",
-        }}
-      />
-      <main id="bhogi-section" className="bg-black text-white">
+
+      <div className="w-full h-40 bg-gradient-to-b from-[#240000] to-black" />
+      <main id="bhogi-section" className="bg-black text-white relative">
         <Hero />
         <div className="bg-gradient-to-b from-black to-gray-950">
           <AboutSection />

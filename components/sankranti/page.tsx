@@ -85,16 +85,12 @@ const GLIMPSES = [
 function AboutSection() {
   return (
     <section className="relative py-32 bg-stone-950 overflow-hidden">
-      {/* Decorative Golden Mandala Glow */}
-      <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-gradient-to-b from-amber-600/20 to-transparent rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-orange-700/10 rounded-full blur-[100px] pointer-events-none" />
-
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center relative z-10">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1 }}
         >
           <div className="inline-block px-3 py-1 mb-4 border border-amber-500/30 rounded-full bg-amber-500/10 text-amber-400 text-sm tracking-widest uppercase font-semibold">
             The Festival of Harvest
@@ -131,18 +127,18 @@ function AboutSection() {
           whileInView={{ opacity: 1, rotate: 0, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
-          className="relative h-[450px] w-full"
+          className="relative h-[60dvh] w-full"
         >
           {/* Artistic Border Frame */}
           <div className="absolute inset-0 border-2 border-amber-500/30 rounded-2xl translate-x-4 translate-y-4" />
 
           <div className="relative h-full w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10 group bg-stone-900">
-            <div className="absolute inset-0 group-hover:scale-110 transition-transform duration-1000">
+            <div className="absolute inset-0  ">
               <Image
-                src="/sankranti/poster.jpg"
+                src="/sankranti/poster2.jpg"
                 alt="Makar Sankranti Celebration"
                 fill
-                className="object-cover opacity-90 group-hover:opacity-100 transition-opacity"
+                className="object-cover"
               />
             </div>
             {/* Overlay Gradient */}

@@ -30,25 +30,25 @@ const events = [
 
 export default function EventsSection() {
   return (
-    <section className="text-white py-20 px-6 md:px-16">
-      <div className="max-w-6xl mx-auto text-center">
+    <section className="text-white py-20 px-6 md:px-16 md:py-32">
+      <div className="max-w-[100dvw] mx-auto text-center">
         {/* Apply castoro.className here */}
         <h2
           className={`text-6xl lg:text-7xl mb-12 ${castoro.className} font-black`}
         >
           Events
         </h2>
-        <div className="grid gap-10 md:grid-cols-3">
+        <div className="grid gap-10 md:gap-16 md:grid-cols-3">
           {events.map((event, idx) => (
             <div
               key={idx}
-              className="bg-gray-900/50 border border-[#7e7567] rounded-2xl py-5 px-8 lg:p-8 shadow-md hover:shadow-lg transition 
+              className="bg-gray-900/50 border border-[#7e7567] rounded-2xl py-5 px-8 lg:p-8 shadow-lg hover:shadow-none shadow-yellow-600 transition 
                          flex flex-col justify-center min-h-[280px]"
             >
               <h3 className="text-3xl lg:text-3xl font-semibold mb-2">
                 {event.title}
               </h3>
-              <p className="text-sm lg:text-base mb-4 text-[#c2beb8]">
+              <p className="text-sm lg:text-base mb-4 md:mb-8 text-[#c2beb8]">
                 {event.date}
               </p>
               <p className="text-gray-300 text-base lg:text-lg">

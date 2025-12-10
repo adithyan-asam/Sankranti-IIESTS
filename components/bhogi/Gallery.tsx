@@ -154,7 +154,7 @@ export function Gallery() {
   };
 
   return (
-    <div className="relative z-10 w-full py-16">
+    <div className="relative z-10 w-full py-32">
       {/* Apply castoro.className here */}
       <h2
         className={`text-6xl md:text-7xl mb-12 text-center ${castoro.className} font-black`}
