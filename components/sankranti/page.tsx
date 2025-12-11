@@ -135,7 +135,7 @@ function AboutSection() {
           <div className="relative h-full w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10 group bg-stone-900">
             <div className="absolute inset-0  ">
               <Image
-                src="/sankranti/poster2.jpg"
+                src="/sankranti/poster2.webp"
                 alt="Makar Sankranti Celebration"
                 fill
                 className="object-cover"
@@ -263,7 +263,7 @@ export default function SankrantiPage() {
             playsInline
             className="w-full h-full object-cover"
           >
-            <source src="sankranti/sank_vid.mp4" type="video/mp4" />
+            <source src="sankranti/sank_vid.webm" type="video/webm" />
           </video>
         </motion.div>
 
