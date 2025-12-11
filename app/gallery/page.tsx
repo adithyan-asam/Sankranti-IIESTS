@@ -93,9 +93,10 @@ const App: React.FC = () => {
           className="mt-2 text-lg md:text-xl text-yellow-100 font-medium tracking-wide"
           style={{ fontFamily: "Poppins, sans-serif" }}
         >
-          Celebrating the joy of{" "}
+          Memories from{" "}
           <span className="text-[#FFBA08]" style={{ fontFamily: "'poppins', cursive" }}>
-            Batches from 2023 Passouts
+            {/* Batches from 2023 Passouts */}
+            2023-2025
           </span>
         </p>
 
