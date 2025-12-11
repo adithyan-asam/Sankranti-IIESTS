@@ -11,12 +11,12 @@ const castoro = Castoro_Titling({
 });
 
 const images = [
-  "/bhogi/img1.jpg",
-  "/bhogi/img2.jpg",
-  "/bhogi/img3.jpg",
-  "/bhogi/img4.jpg",
-  "/bhogi/img5.jpg",
-  "/bhogi/img6.jpg",
+  "/bhogi/img1.webp",
+  "/bhogi/img2.webp",
+  "/bhogi/img3.webp",
+  "/bhogi/img4.webp",
+  "/bhogi/img5.webp",
+  "/bhogi/img6.webp",
 ];
 
 const filmReelImages = [...images, ...images, ...images];
